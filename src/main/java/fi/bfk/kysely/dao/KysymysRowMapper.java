@@ -7,9 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import fi.bfk.kysely.bean.Kysymys;
 
-
-
-	public class KysymysRowMapper  {
+	public class KysymysRowMapper implements RowMapper<Kysymys>  {
 
 		public Kysymys mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Kysymys k = new Kysymys();

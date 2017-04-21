@@ -14,4 +14,3 @@ create table Admin(
     kayttajatunnus varchar(50) not null,
     salasana varchar(300) not null,
     primary key (kayttajatunnus));
-    
