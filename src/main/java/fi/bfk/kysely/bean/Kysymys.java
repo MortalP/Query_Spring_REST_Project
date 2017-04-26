@@ -12,7 +12,6 @@ public class Kysymys {
 	}
 	public Kysymys() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public int getId() {
 		return id;

@@ -14,7 +14,6 @@ public Vastaus(int id, String vastaus, int kysymys_id){
 }
 public Vastaus() {
 	super();
-	// TODO Auto-generated constructor stub
 }
 public int getId() {
 	return id;
