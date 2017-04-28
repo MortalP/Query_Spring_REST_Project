@@ -1,8 +1,17 @@
+create table Kysely(
+	id int auto_increment not null,
+	nimi varchar(100),
+	primary key (id));
+
 create table Kysymys(
     id int auto_increment not null,
     kysymys varchar(300) not null,
-    primary key (id));
-    
+    tyyppi varchar(50),
+    description varchar (500),
+    kysely_id int,
+    primary key (id),
+    foreign key (kysely_id) REFERENCES Kysely(id));
+
 create table Vastaus(
     id int auto_increment not null,
     vastaus varchar(300) not null,

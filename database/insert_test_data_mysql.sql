@@ -1,8 +1,11 @@
-INSERT INTO Kysymys (kysymys)
+INSERT INTO Kysely(nimi)
+VALUES ("Mielipidekysely");
+
+INSERT INTO Kysymys (kysymys, tyyppi, description,kysely_id)
 VALUES 
-    ("Missä on jatkot?"),
-    ("Miten menee?"),
-    ("Maistuisiko olut?");
+    ("Missä on jatkot?", "Teksti", "Testitestitesti", 1 ),
+    ("Miten menee?", "Teksti", "Kerrontaa", 1),
+    ("Maistuisiko olut?", "Monivalinta", "Pilipalijuttuu", 1);
     
 INSERT INTO Vastaus (vastaus, kysymys_id)
 VALUES 
@@ -12,3 +15,4 @@ VALUES
 INSERT INTO Admin (kayttajatunnus, salasana)
 VALUES 
     ("devaaja", "salainen");
+    
