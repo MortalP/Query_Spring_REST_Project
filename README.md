@@ -3,6 +3,8 @@
 Demonstrates the capabilities of the Spring MVC web framework through query application.
 After reviewing this project, you should have a good understanding of what Spring MVC can do and get a feel for how easy it is to use.
 
+[![build status]]
+
 In this application you'll see the following in action:
 
 * @Controller
@@ -40,10 +42,35 @@ In your preferred IDE such as SpringSource Tool Suite (STS) or IDEA:
 
 Access the deployed web application at: http://localhost:8080/kysely/
 
+Show Queries:
+------------------
+Returns json data about queris.
+
+* URL:
+
+  http://localhost:8080/kysely/kysymykset/kysymykset.json
+
+* Method:
+
+  `GET`
+
+* Sample Call:
+
+  ```javascript
+    $.ajax({
+      url: "/users/1",
+      dataType: "json",
+      type : "GET",
+      success : function(r) {
+        console.log(r);
+      }
+    });
+  ```
+
 Note:
 -------------------
 Group project made by:
-* Ville Lepistö
+* Ville LepistÃ¶
 * Samuli Nuorteva
 * Jimi Nurmi
 * Sami Oksanen
