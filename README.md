@@ -1,9 +1,7 @@
 # Query_Spring_Project
 -------------------
-Demonstrates the capabilities of the Spring MVC web framework through query application.
-After reviewing this project, you should have a good understanding of what Spring MVC can do and get a feel for how easy it is to use.
-
-[![build status]]
+Demonstrates the capabilities of the Spring MVC web framework and the RESTful web service through query application.
+After reviewing this project, you should have a good understanding of what Spring MVC and REST can do and get a feel for how easy it is to use.
 
 In this application you'll see the following in action:
 
