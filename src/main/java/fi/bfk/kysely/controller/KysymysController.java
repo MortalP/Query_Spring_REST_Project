@@ -3,8 +3,10 @@ package fi.bfk.kysely.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.swing.text.html.parser.Entity;
 import javax.validation.Valid;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,6 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import fi.bfk.kysely.dao.KysymysDAO;
 import fi.bfk.kysely.bean.Kysymys;
@@ -51,6 +57,32 @@ public class KysymysController {
 			return "redirect:/kysymykset/" + kysymys.getId();
 		}
 	}
+	
+	
+	@RequestMapping(value="kysymykset.json", method = RequestMethod.GET)
+	public @ResponseBody ResponseEntity <List<Kysymys>> haeKysymyksetJSON() {
+		List<Kysymys> kysymykset = dao.haeKaikki();
+		
+		
+		return new ResponseEntity <List<Kysymys>>(kysymykset, HttpStatus.OK);
+		
+	}
+
+	
+	
+	
+	@RequestMapping(value = "kysymykset/{id}")
+	public ResponseEntity<Kysymys> haeKaikki(@PathVariable("id") int id){
+		Kysymys kysymys = dao.etsi(id);
+		return new ResponseEntity<Kysymys>(kysymys, HttpStatus.OK);
+	}
+	
+	
+	@RequestMapping("kysymykset")
+	public String naytaKysymyslista(){
+		return "kyse/kysymyslista";
+	}
+	
 	
 	//KYSYMYKSEN TIETOJEN NÄYTTÄMINEN
 	@RequestMapping(value="{id}", method=RequestMethod.GET)
