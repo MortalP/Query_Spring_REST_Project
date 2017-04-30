@@ -59,24 +59,6 @@ public class KysymysController {
 	}
 	
 	
-	@RequestMapping(value="kysymykset.json", method = RequestMethod.GET)
-	public @ResponseBody ResponseEntity <List<Kysymys>> haeKysymyksetJSON() {
-		List<Kysymys> kysymykset = dao.haeKaikki();
-		
-		
-		return new ResponseEntity <List<Kysymys>>(kysymykset, HttpStatus.OK);
-		
-	}
-
-	
-	
-	
-	@RequestMapping(value = "kysymykset/{id}")
-	public ResponseEntity<Kysymys> haeKaikki(@PathVariable("id") int id){
-		Kysymys kysymys = dao.etsi(id);
-		return new ResponseEntity<Kysymys>(kysymys, HttpStatus.OK);
-	}
-	
 	
 	@RequestMapping("kysymykset")
 	public String naytaKysymyslista(){
