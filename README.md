@@ -6,6 +6,7 @@ After reviewing this project, you should have a good understanding of what Sprin
 In this application you'll see the following in action:
 
 * @Controller
+* @RestController
 * Mapping Requests
 * Obtaining Request Data
 * Generating Responses
@@ -50,7 +51,7 @@ Returns json data about queris.
 
 * Method:
 
-  `GET`
+  `GET` | `POST` | `DELETE` | `PUT`
 
 * Sample Call:
 
