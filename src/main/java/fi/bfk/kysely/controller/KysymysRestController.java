@@ -63,7 +63,7 @@ public class KysymysRestController {
 	
 	
 	//etsi yksittäinen kysymys
-	@RequestMapping(value = "/rest/{id}")
+	@RequestMapping(value = "/rest/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Kysymys> haeKaikki(@PathVariable("id") int id){
 		Kysymys kysymys = dao.etsi(id);
 		
@@ -112,7 +112,7 @@ public class KysymysRestController {
 		
 		//etsi yksittäinen vastaus
 		
-		@RequestMapping(value = "/rest/v/{id}")
+		@RequestMapping(value = "/rest/v/{id}", method=RequestMethod.GET)
 		public ResponseEntity<Vastaus> haeKaikkiVastaukset(@PathVariable("id") int id){
 			Vastaus vastaus = dao.etsiVastaus(id);
 			
