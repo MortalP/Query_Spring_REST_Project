@@ -122,7 +122,7 @@ public class KysymysDAO {
 	}
 	
 	public Vastaus etsiVastaus(int id) {
-		String sql = "SELECT vastaus, id FROM Vastaus WHERE id = ?";
+		String sql = "SELECT vastaus, id, kysymys_id FROM Vastaus WHERE id = ?";
 		Object[] parametrit = new Object[] { id };
 		RowMapper<Vastaus> mapper = new VastausRowMapper();
 
