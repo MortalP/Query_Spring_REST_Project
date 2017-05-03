@@ -42,7 +42,7 @@ public class KysymysRestController {
 	}
 	
 	
-	//lis‰‰ kysymys
+	//lis√§√§ kysymys
 	@RequestMapping(value="/rest/", method=RequestMethod.POST)
 	public ResponseEntity <Kysymys> talleta(@RequestBody Kysymys k) {
 		dao.talleta(k);
@@ -62,7 +62,7 @@ public class KysymysRestController {
 
 	
 	
-	//etsi yksitt‰inen kysymys
+	//etsi yksitt√§inen kysymys
 	@RequestMapping(value = "/rest/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Kysymys> haeKaikki(@PathVariable("id") int id){
 		Kysymys kysymys = dao.etsi(id);
@@ -81,7 +81,7 @@ public class KysymysRestController {
 	return new ResponseEntity<Kysymys>(HttpStatus.NO_CONTENT);
 	}*/
 	
-	//muokkaa kysymyst‰
+	//muokkaa kysymyst√§
 	/*
 	@RequestMapping(value = "/rest/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Kysymys> update(@PathVariable("id")int id, @RequestBody Kysymys kysymys){
@@ -90,14 +90,14 @@ public class KysymysRestController {
 		return new ResponseEntity<Kysymys>(nykyinenKysymys, HttpStatus.OK);
 	}*/
 	
-	//lis‰‰ vastaus
-		@RequestMapping(value="/rest/v/", method=RequestMethod.POST)
-		public ResponseEntity <Vastaus> talleta(@RequestBody Vastaus v) {
-			dao.talletaVastaus(v);
+	//lis√§√§ vastaus
+	@RequestMapping(value="/rest/v/", method=RequestMethod.POST)
+		public ResponseEntity <VastausKysymykseen> talletaVastaus(@RequestBody VastausKysymykseen vk) {
+			dao.talletaVastaus(vk);
 			
-	        return new ResponseEntity<Vastaus>(v, HttpStatus.OK);
+	        return new ResponseEntity<VastausKysymykseen>(vk, HttpStatus.OK);
 			
-		}
+	}
 		
 		//etsi kaikki vastaukset
 		@RequestMapping(value="/rest/v/", method = RequestMethod.GET)
@@ -110,7 +110,7 @@ public class KysymysRestController {
 
 		
 		
-		//etsi yksitt‰inen vastaus
+		//etsi yksitt√§inen vastaus
 		
 		@RequestMapping(value = "/rest/v/{id}", method=RequestMethod.GET)
 		public ResponseEntity<Vastaus> haeKaikkiVastaukset(@PathVariable("id") int id){
