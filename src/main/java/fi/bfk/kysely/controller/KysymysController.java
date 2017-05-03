@@ -88,7 +88,7 @@ public class KysymysController {
 	
 	//FORMIN TIETOJEN VASTAANOTTO
 	@RequestMapping(value="lista", method=RequestMethod.POST)
-	public String createVastaus( @ModelAttribute(value="vastaus") @Valid Vastaus vastaus, BindingResult result) {
+	public String createVastaus( @ModelAttribute(value="vastaus") @Valid VastausKysymykseen vastaus, BindingResult result) {
 		if (result.hasErrors()) {
 			return "kyse/lista";
 		} else {

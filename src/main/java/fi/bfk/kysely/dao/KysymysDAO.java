@@ -117,7 +117,7 @@ public class KysymysDAO {
 
 		// tallennetaan id takaisin beaniin, koska
 		// kutsujalla pitäisi olla viittaus samaiseen olioon
-		v.setId(idHolder.getKey().intValue());
+		vk.setId(idHolder.getKey().intValue());
 
 	}
 	
