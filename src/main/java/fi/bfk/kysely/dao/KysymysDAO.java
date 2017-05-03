@@ -40,14 +40,14 @@ public class KysymysDAO {
 	public void talleta(Kysymys k) {
 		final String sql = "INSERT INTO Kysymys(kysymys) VALUES(?)";
 
-		// anonyymi sis‰luokka tarvitsee vakioina v‰litett‰v‰t arvot,
-		// jotta roskien keruu onnistuu t‰m‰n metodin suorituksen p‰‰ttyess‰.
+		// anonyymi sis√§luokka tarvitsee vakioina v√§litett√§v√§t arvot,
+		// jotta roskien keruu onnistuu t√§m√§n metodin suorituksen p√§√§ttyess√§.
 		final String kysymys = k.getKysymys();
 
-		// jdbc pist‰‰ generoidun id:n t‰nne talteen
+		// jdbc pist√§√§ generoidun id:n t√§nne talteen
 		KeyHolder idHolder = new GeneratedKeyHolder();
 
-		// suoritetaan p‰ivitys itse m‰‰ritellyll‰ PreparedStatementCreatorilla
+		// suoritetaan p√§ivitys itse m√§√§ritellyll√§ PreparedStatementCreatorilla
 		// ja KeyHolderilla
 		jdbcTemplate.update(new PreparedStatementCreator() {
 			public PreparedStatement createPreparedStatement(
@@ -60,7 +60,7 @@ public class KysymysDAO {
 		}, idHolder);
 
 		// tallennetaan id takaisin beaniin, koska
-		// kutsujalla pit‰isi olla viittaus samaiseen olioon
+		// kutsujalla pit√§isi olla viittaus samaiseen olioon
 		k.setId(idHolder.getKey().intValue());
 
 	}
@@ -91,17 +91,18 @@ public class KysymysDAO {
 	
 	//Vastaus osio:
 	
-	public void talletaVastaus(Vastaus v) {
-		final String sql = "INSERT INTO Vastaus(vastaus) VALUES(?)";
+	public void talletaVastaus(VastausKysymykseen vk) {
+		final String sql = "INSERT INTO Vastaus(vastaus, kysymys_id) VALUES(?, ?)";
 
-		// anonyymi sis‰luokka tarvitsee vakioina v‰litett‰v‰t arvot,
-		// jotta roskien keruu onnistuu t‰m‰n metodin suorituksen p‰‰ttyess‰.
-		final String vastaus = v.getVastaus();
+		// anonyymi sis√§luokka tarvitsee vakioina v√§litett√§v√§t arvot,
+		// jotta roskien keruu onnistuu t√§m√§n metodin suorituksen p√§√§ttyess√§.
+		final String vastaus = vk.getVastaus();
+		final int kysymys_id = vk.getKysymys_id();
 
-		// jdbc pist‰‰ generoidun id:n t‰nne talteen
+		// jdbc pist√§√§ generoidun id:n t√§nne talteen
 		KeyHolder idHolder = new GeneratedKeyHolder();
 
-		// suoritetaan p‰ivitys itse m‰‰ritellyll‰ PreparedStatementCreatorilla
+		// suoritetaan p√§ivitys itse m√§√§ritellyll√§ PreparedStatementCreatorilla
 		// ja KeyHolderilla
 		jdbcTemplate.update(new PreparedStatementCreator() {
 			public PreparedStatement createPreparedStatement(
@@ -109,12 +110,13 @@ public class KysymysDAO {
 				PreparedStatement ps = connection.prepareStatement(sql,
 						new String[] { "id" });
 				ps.setString(1, vastaus);
+				ps.setInt(2, kysymys_id);
 				return ps;
 			}
 		}, idHolder);
 
 		// tallennetaan id takaisin beaniin, koska
-		// kutsujalla pit‰isi olla viittaus samaiseen olioon
+		// kutsujalla pit√§isi olla viittaus samaiseen olioon
 		v.setId(idHolder.getKey().intValue());
 
 	}
