@@ -26,6 +26,7 @@ import fi.bfk.kysely.bean.Vastaus;
 import fi.bfk.kysely.bean.VastausKysymykseen;
 import fi.bfk.kysely.dao.KysymysDAO;
 
+
 @RestController
 
 
@@ -43,6 +44,7 @@ public class KysymysRestController {
 	
 	
 	//lisää kysymys
+
 	@RequestMapping(value="/rest/", method=RequestMethod.POST)
 	public ResponseEntity <Kysymys> talleta(@RequestBody Kysymys k) {
 		dao.talleta(k);
