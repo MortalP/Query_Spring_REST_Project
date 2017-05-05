@@ -1,6 +1,6 @@
 # Query_Spring_Project
 -------------------
-Demonstrates the capabilities of the Spring MVC web framework and the RESTful web service through query application.
+Demonstrates the capabilities of the Spring MVC web framework, Spring Security and the RESTful web service through query application.
 After reviewing this project, you should have a good understanding of what Spring MVC and REST can do and get a feel for how easy it is to use.
 
 In this application you'll see the following in action:
@@ -47,7 +47,7 @@ Returns json data about queris.
 
 * URL:
 
-  http://localhost:8080/kysely/kysymykset/kysymykset.json
+  http://localhost:8080/kysely/rest/
 
 * Method:
 
@@ -57,7 +57,7 @@ Returns json data about queris.
 
   ```javascript
     $.ajax({
-      url: "/users/1",
+      url: "http://localhost:8080/kysely/rest/",
       dataType: "json",
       type : "GET",
       success : function(r) {
