@@ -11,6 +11,7 @@
 
 <p>
 	<a href="kysymykset/lista">Kysely</a><br>
+	<a href="kysymykset/kyselylista">Kyselyt</a><br>
 	<a href="kysymykset/vastauslista">Vastaukset</a><br>
 	<a href="kysymykset/uusi">Kysymyksen lisäys</a>
 </p>

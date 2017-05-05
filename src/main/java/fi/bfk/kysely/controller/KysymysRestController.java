@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import fi.bfk.kysely.bean.Kysely;
 import fi.bfk.kysely.bean.Kysymys;
 import fi.bfk.kysely.bean.Vastaus;
 import fi.bfk.kysely.bean.VastausKysymykseen;
@@ -42,40 +43,49 @@ public class KysymysRestController {
 		this.dao = dao;
 	}
 	
-	
-	//lisää kysymys
-
+	//lisää kysely
 	@RequestMapping(value="/rest/", method=RequestMethod.POST)
+	public ResponseEntity <Kysely> talletaKysely(@RequestBody Kysely ky) {
+		dao.talletaKysely(ky);
+			
+	    return new ResponseEntity<Kysely>(ky, HttpStatus.OK);		
+	}
+		
+	//etsi kaikki kyselyt
+	@RequestMapping(value="/rest/", method = RequestMethod.GET)
+	public @ResponseBody ResponseEntity <List<Kysely>> haeKaikkiKyselytJSON() {
+		List<Kysely> kyselyt = dao.haeKaikkiKyselyt();
+			
+		return new ResponseEntity <List<Kysely>>(kyselyt, HttpStatus.OK);	
+	}
+		
+	//lisää kysymys
+	@RequestMapping(value="/rest/k/", method=RequestMethod.POST)
 	public ResponseEntity <Kysymys> talleta(@RequestBody Kysymys k) {
 		dao.talleta(k);
 		
-        return new ResponseEntity<Kysymys>(k, HttpStatus.OK);
-		
+        return new ResponseEntity<Kysymys>(k, HttpStatus.OK);		
 	}
 	
 	//etsi kaikki kysymykset
-	@RequestMapping(value="/rest/", method = RequestMethod.GET)
+	@RequestMapping(value="/rest/k/", method = RequestMethod.GET)
 	public @ResponseBody ResponseEntity <List<Kysymys>> haeKysymyksetJSON() {
 		List<Kysymys> kysymykset = dao.haeKaikki();
 		
-		return new ResponseEntity <List<Kysymys>>(kysymykset, HttpStatus.OK);
-		
+		return new ResponseEntity <List<Kysymys>>(kysymykset, HttpStatus.OK);	
 	}
-
-	
 	
 	//etsi yksittäinen kysymys
-	@RequestMapping(value = "/rest/{id}", method=RequestMethod.GET)
+	@RequestMapping(value = "/rest/k/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Kysymys> haeKaikki(@PathVariable("id") int id){
 		Kysymys kysymys = dao.etsi(id);
 		
 		return new ResponseEntity<Kysymys>(kysymys, HttpStatus.OK);
 	}
 	
-	
 	//poista kysymys
 	/*
-	@RequestMapping(value = "/rest/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/rest/k/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Kysymys> poista(@PathVariable("id")int id){
 	Kysymys kysymys = dao.etsi(id);
 	
@@ -85,7 +95,7 @@ public class KysymysRestController {
 	
 	//muokkaa kysymystä
 	/*
-	@RequestMapping(value = "/rest/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/rest/k/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Kysymys> update(@PathVariable("id")int id, @RequestBody Kysymys kysymys){
 		Kysymys nykyinenKysymys = null; dao.etsi(id);
 		nykyinenKysymys.setKysymys(kysymys.getKysymys());
@@ -102,24 +112,20 @@ public class KysymysRestController {
 	}
 		
 		//etsi kaikki vastaukset
-		@RequestMapping(value="/rest/v/", method = RequestMethod.GET)
-		public @ResponseBody ResponseEntity<List<VastausKysymykseen>> haeKaikkiVastauksetJSON() {
-			List<VastausKysymykseen> vastaukset = dao.haeKaikkiVastaukset();
+	@RequestMapping(value="/rest/v/", method = RequestMethod.GET)
+	public @ResponseBody ResponseEntity<List<VastausKysymykseen>> haeKaikkiVastauksetJSON() {
+		List<VastausKysymykseen> vastaukset = dao.haeKaikkiVastaukset();
 			
-			return new ResponseEntity <List<VastausKysymykseen>>(vastaukset, HttpStatus.OK);
-			
-		}
+		return new ResponseEntity <List<VastausKysymykseen>>(vastaukset, HttpStatus.OK);
+	}
 
-		
-		
 		//etsi yksittäinen vastaus
-		
-		@RequestMapping(value = "/rest/v/{id}", method=RequestMethod.GET)
-		public ResponseEntity<Vastaus> haeKaikkiVastaukset(@PathVariable("id") int id){
-			Vastaus vastaus = dao.etsiVastaus(id);
+	@RequestMapping(value = "/rest/v/{id}", method=RequestMethod.GET)
+	public ResponseEntity<Vastaus> haeKaikkiVastaukset(@PathVariable("id") int id){
+		Vastaus vastaus = dao.etsiVastaus(id);
 			
-			return new ResponseEntity<Vastaus>(vastaus, HttpStatus.OK);
-		}
+		return new ResponseEntity<Vastaus>(vastaus, HttpStatus.OK);
+	}
 	
 
 }

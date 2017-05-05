@@ -20,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import fi.bfk.kysely.dao.KysymysDAO;
+import fi.bfk.kysely.bean.Kysely;
 import fi.bfk.kysely.bean.Kysymys;
 import fi.bfk.kysely.bean.Vastaus;
 import fi.bfk.kysely.bean.VastausKysymykseen;
@@ -66,7 +67,7 @@ public class KysymysController {
 	}
 	
 	
-	//KYSYMYKSEN TIETOJEN NÄYTTÄMINEN
+	//KYSYMYKSEN TIETOJEN Nï¿½YTTï¿½MINEN
 	@RequestMapping(value="{id}", method=RequestMethod.GET)
 	public String getView(@PathVariable Integer id, Model model) {
 		Kysymys kysymys = dao.etsi(id);
@@ -74,7 +75,7 @@ public class KysymysController {
 		return "kyse/view";
 	}
 	
-	//KYSYMYSLISTAN NÄYTTÄMINEN
+	//KYSYMYSLISTAN Nï¿½YTTï¿½MINEN
 	@RequestMapping (value="lista", method=RequestMethod.GET)
 	public String getDetails(Model model){
 		List<Kysymys> kysymykset = dao.haeKaikki();
@@ -97,7 +98,7 @@ public class KysymysController {
 		}
 	}
 	
-	//VASTAUKSEN TIETOJEN NÄYTTÄMINEN
+	//VASTAUKSEN TIETOJEN NÃ„YTTÃ„MINEN
 	@RequestMapping(value="vastaus", method=RequestMethod.GET)
 	public String getVastaus(@PathVariable Integer id, Model model) {
 		Vastaus vastaus = dao.etsiVastaus(id);
@@ -105,11 +106,19 @@ public class KysymysController {
 		return "kyse/vastaus";
 	}
 
-	//VASTAUSLISTAN NÄYTTÄMINEN
+	//VASTAUSLISTAN NÃ„YTTÃ„MINEN
 	@RequestMapping (value="vastauslista", method=RequestMethod.GET)
 	public String getVastaukset(Model model){
 		List<VastausKysymykseen> vastaukset = dao.haeKaikkiVastaukset();
 		model.addAttribute("vastaukset", vastaukset);
 		return "kyse/vastauslista";
+	}
+	
+	//KYSELYLISTAN NÃ„YTTÃ„MINEN
+	@RequestMapping (value="kyselylista", method=RequestMethod.GET)
+	public String getKyselyt(Model model){
+		List<Kysely> kyselyt = dao.haeKaikkiKyselyt();
+		model.addAttribute("kyselyt", kyselyt);
+		return "kyse/kyselylista";
 	}
 }
