@@ -4,14 +4,18 @@ public class Kysymys {
 	
 	private int id;
 	private String kysymys;
-	
-	public Kysymys(int id, String kysymys) {
+	 private int kysely_id;
+	 
+	 
+	public Kysymys() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Kysymys(int id, String kysymys, int kysely_id) {
 		super();
 		this.id = id;
 		this.kysymys = kysymys;
-	}
-	public Kysymys() {
-		super();
+		this.kysely_id = kysely_id;
 	}
 	public int getId() {
 		return id;
@@ -25,8 +29,15 @@ public class Kysymys {
 	public void setKysymys(String kysymys) {
 		this.kysymys = kysymys;
 	}
+	public int getKysely_id() {
+		return kysely_id;
+	}
+	public void setKysely_id(int kysely_id) {
+		this.kysely_id = kysely_id;
+	}
 	@Override
 	public String toString() {
-		return "Kysymys [id=" + id + ", kysymys=" + kysymys + "]";
+		return "Kysymys [id=" + id + ", kysymys=" + kysymys + ", kysely_id=" + kysely_id + "]";
 	}
+	 
 }

@@ -40,11 +40,12 @@ public class KysymysDAO {
 	}
 	
 	public void talleta(Kysymys k) {
-		final String sql = "INSERT INTO Kysymys(kysymys) VALUES(?)";
+		final String sql = "INSERT INTO Kysymys(kysymys, kysely_id) VALUES(?, ?)";
 
 		// anonyymi sis‰luokka tarvitsee vakioina v‰litett‰v‰t arvot,
 		// jotta roskien keruu onnistuu t‰m‰n metodin suorituksen p‰‰ttyess‰.
 		final String kysymys = k.getKysymys();
+		final int kysely_id = k.getKysely_id(); 
 
 		// jdbc pist‰‰ generoidun id:n t‰nne talteen
 		KeyHolder idHolder = new GeneratedKeyHolder();
@@ -57,6 +58,7 @@ public class KysymysDAO {
 				PreparedStatement ps = connection.prepareStatement(sql,
 						new String[] { "id" });
 				ps.setString(1, kysymys);
+				ps.setInt(2, kysely_id);
 				return ps;
 			}
 		}, idHolder);

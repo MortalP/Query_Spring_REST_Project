@@ -13,7 +13,7 @@ import fi.bfk.kysely.bean.Kysymys;
 			Kysymys k = new Kysymys();
 			k.setId(rs.getInt("id"));
 			k.setKysymys(rs.getString("kysymys"));
-			
+			k.setKysely_id(rs.getInt("kysely_id"));
 			return k;
 		}
 
