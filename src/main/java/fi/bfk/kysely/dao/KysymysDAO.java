@@ -180,6 +180,25 @@ public class KysymysDAO {
 
 	}
 	
+	
+	public void poista(final int id){
+		
+	    // Prepare our SQL statement using Unnamed Parameters style
+	    String sql = "DELETE FROM Vastaus WHERE kysymys_id=?";
+
+	    // Assign values to parameters
+	    Object[] kysymysPoisto = new Object[] {id};
+
+	    // Delete
+	    jdbcTemplate.update(sql, kysymysPoisto);
+		
+	    String sql2 ="DELETE FROM Kysymys WHERE id=?;";
+	    
+	    jdbcTemplate.update(sql2, kysymysPoisto);
+	
+}
+	
+	
 	public List<Kysely> haeKaikkiKyselyt() {
 		String sql = "SELECT nimi, kysely_id, kysymys, kysymys_id, vastaus, Vastaus.id FROM Vastaus RIGHT JOIN Kysymys ON Vastaus.kysymys_id=Kysymys.id LEFT JOIN Kysely ON Kysymys.kysely_id = Kysely.id";
 		RowMapper<Kysely> mapper = new KyselyRowMapper();

@@ -83,15 +83,16 @@ public class KysymysRestController {
 		return new ResponseEntity<Kysymys>(kysymys, HttpStatus.OK);
 	}
 	
-	//poista kysymys
-	/*
-	@RequestMapping(value = "/rest/k/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Kysymys> poista(@PathVariable("id")int id){
-	Kysymys kysymys = dao.etsi(id);
+//poista kysymys
 	
-	dao.poistaKysymysById(id);
-	return new ResponseEntity<Kysymys>(HttpStatus.NO_CONTENT);
-	}*/
+	@RequestMapping(value = "/rest/v/a/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Vastaus> poista(@PathVariable("id")int kysymys_id){
+	System.out.println("poista: "+kysymys_id);
+		//Vastaus vastaus = dao.etsiVastaus(kysymys_id);
+	
+	dao.poista(kysymys_id);
+	return new ResponseEntity<Vastaus>(HttpStatus.NO_CONTENT);
+	}
 	
 	//muokkaa kysymystä
 	/*
