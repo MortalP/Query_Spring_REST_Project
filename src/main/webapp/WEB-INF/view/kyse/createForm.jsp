@@ -1,3 +1,4 @@
+
 <%@page contentType="text/html;charset=UTF-8"%>
 <%@page pageEncoding="UTF-8"%>
 <%@ page session="false" %>
@@ -27,7 +28,7 @@
 <script>
 function add(){
        var uusiKysymys = $("#kysymys").val();
-       var uusiKysely_id = $("#kysely_id").val();
+       var uusiKysely_id = parseInt($("#kysely_id").val());
        var jsonData = JSON.stringify({"kysymys": uusiKysymys, "kysely_id": uusiKysely_id});
         $('#target').html('sending..' + $("#kysymys").val());
        $.ajax({
