@@ -86,7 +86,7 @@ function add(){
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
-                    $('#target').html('Kysymys "' + $('#kysymys').val() + '" lisätty kyselyyn "' + nimi + '.');
+                    $('#target').html('Kysymys "' + $('#kysymys').val() + '" lisätty kyselyyn "' + nimi + '".');
                 }
             });
         })
