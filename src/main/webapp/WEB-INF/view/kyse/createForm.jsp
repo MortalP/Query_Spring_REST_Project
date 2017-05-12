@@ -18,29 +18,82 @@
 </head>
 <body>
 <h1>Lisää kysymys</h1>
-
 <input type="text" name="kysymys" id="kysymys"><br>
-<input type="text" name="kysely_id" id="kysely_id"><br>
+<select id="kyselyt" > </select>
 <button onclick="add()">Lisää</button>
 <div id="target"></div>
     
 <p><a href="../">Peruuta</a></p>
 <script>
+
+function kyselyt(){
+	var dataa = "http://proto353.haaga-helia.fi:8080/kysely/rest/";
+	$.ajax({
+		url: dataa,
+        type: "GET",
+		dataType: "json",
+        contentType: "application/json; charset=utf-8",
+		})
+	.done(function(data){
+        var lista = [];
+   		var select = document.getElementById("kyselyt");
+        $.each(data, function(index, kyselyt){
+        	var found = lista.includes(kyselyt.nimi)
+        	if(found == false && kyselyt.nimi != null){
+        		lista[lista.length] = kyselyt.nimi;
+        	}
+        })
+        for(var i=0; i<lista.length; i++){
+            var option = document.createElement("option");
+            option.innerHTML = lista[i];
+            option.value = lista[i];
+            select.appendChild(option);
+        }
+     
+	})
+	.fail(function() {
+	})	
+	.complete(function() {
+	})
+}
+kyselyt();
+
 function add(){
-       var uusiKysymys = $("#kysymys").val();
-       var uusiKysely_id = parseInt($("#kysely_id").val());
-       var jsonData = JSON.stringify({"kysymys": uusiKysymys, "kysely_id": uusiKysely_id});
-        $('#target').html('sending..' + $("#kysymys").val());
-       $.ajax({
-           url: "http://proto353.haaga-helia.fi:8080/kysely/rest/k/",
-           type: "POST",
-           data: jsonData,
-           dataType: "json",
-           contentType: "application/json; charset=utf-8",
-           success: function (data) {
-                $('#target').html('Kysymys "' + $('#kysymys').val() + '" lisätty.');
-            }
-       });
+        var dataa = "http://proto353.haaga-helia.fi:8080/kysely/rest/";
+        var nimi = $("#kyselyt").val();
+        var idLista = [];
+        var nimiLista = [];
+        var valittu = 0;
+        $.ajax({
+            url: dataa,
+            type: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            })
+        .done(function(data){
+            $.each(data, function(index, kyselyt){
+            	if(kyselyt.nimi == nimi){
+                    valittu = parseInt(kyselyt.kysely_id);
+                }
+            })
+            var uusiKysymys = $("#kysymys").val();
+            var jsonData = JSON.stringify({"kysymys": uusiKysymys, "kysely_id": valittu});
+            $('#target').html('sending.. ' + $("#kysymys").val());
+            $.ajax({
+                url: "http://proto353.haaga-helia.fi:8080/kysely/rest/k/",
+                type: "POST",
+                data: jsonData,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $('#target').html('Kysymys "' + $('#kysymys').val() + '" lisätty kyselyyn "' + nimi + '.');
+                }
+            });
+        })
+        .fail(function() {
+        })	
+        .complete(function() {
+        })
 }
 </script>
 </body>
