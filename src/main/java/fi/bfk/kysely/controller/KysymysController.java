@@ -48,9 +48,11 @@ public class KysymysController {
 		model.addAttribute("kysymys", tyhjaKysymys);
 		return "kyse/createForm";
 	}
+
+
 	
 	//FORMIN TIETOJEN VASTAANOTTO
-	@RequestMapping(value="uusi", method=RequestMethod.POST)
+/* 	@RequestMapping(value="uusi", method=RequestMethod.POST)
 	public String create( @ModelAttribute(value="kysymys") @Valid Kysymys kysymys, BindingResult result) {
 		if (result.hasErrors()) {
 			return "kyse/createForm";
@@ -59,7 +61,7 @@ public class KysymysController {
 			return "redirect:/kysymykset/" + kysymys.getId();
 		}
 	}
-	
+*/
 	
 	
 	@RequestMapping("kysymykset")
