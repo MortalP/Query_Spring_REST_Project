@@ -70,7 +70,7 @@ public class KysymysDAO {
 	}
 	
 	public Kysymys etsi(int id) {
-		String sql = "SELECT kysymys, id FROM Kysymys WHERE id = ?";
+		String sql = "SELECT kysymys, kysely_id, id FROM Kysymys WHERE id = ?";
 		Object[] parametrit = new Object[] { id };
 		RowMapper<Kysymys> mapper = new KysymysRowMapper();
 
@@ -86,7 +86,7 @@ public class KysymysDAO {
 
 	public List<Kysymys> haeKaikki() {
 
-		String sql = "SELECT id, kysymys FROM Kysymys";
+		String sql = "SELECT id, kysymys, kysely_id FROM Kysymys";
 		RowMapper<Kysymys> mapper = new KysymysRowMapper();
 		List<Kysymys> kysymykset = jdbcTemplate.query(sql, mapper);
 
