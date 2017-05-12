@@ -42,8 +42,9 @@ public class KysymysController {
 	//FORMIN TEKEMINEN
 	@RequestMapping(value="uusi", method=RequestMethod.GET)
 	public String getCreateForm(Model model) {
-		Kysymys tyhjaKysymys = new Kysymys();
+	
 		
+		Kysymys tyhjaKysymys = new Kysymys();
 		model.addAttribute("kysymys", tyhjaKysymys);
 		return "kyse/createForm";
 	}
@@ -121,4 +122,6 @@ public class KysymysController {
 		model.addAttribute("kyselyt", kyselyt);
 		return "kyse/kyselylista";
 	}
+	
+
 }

@@ -187,6 +187,15 @@ public class KysymysDAO {
 
 		return kyselyt;
 	}
+	
+	public List<Kysely> haeKyselyt() {
+		String sql = "SELECT nimi, kysely_id FROM Vastaus RIGHT JOIN Kysymys ON Vastaus.kysymys_id=Kysymys.id LEFT JOIN Kysely ON Kysymys.kysely_id = Kysely.id";
+		RowMapper<Kysely> mapper = new KyselyRowMapper();
+		List<Kysely> kyselyt = jdbcTemplate.query(sql, mapper);
+
+		return kyselyt;
+	}
 }
+
 
 
