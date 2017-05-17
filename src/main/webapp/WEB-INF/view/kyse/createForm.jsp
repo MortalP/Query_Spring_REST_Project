@@ -17,10 +17,14 @@
 <title>Kysymyksen lisääminen</title>
 </head>
 <body>
-<h1>Lisää kysymys</h1>
+<h1>Kysely lisäys</h1>
+<input type="text" name="kysely" id="kysely"><br>
+<button onclick="addKysely()">Lisää kysely</button>
+<div id="targetKysely"></div>
+<h1>Kysymyksen lisäys</h1>
 <input type="text" name="kysymys" id="kysymys"><br>
 <select id="kyselyt" > </select>
-<button onclick="add()">Lisää</button>
+<button onclick="add()">Lisää kysymys</button>
 <div id="target"></div>
     
 <p><a href="../">Peruuta</a></p>
@@ -57,7 +61,7 @@ function kyselyt(){
 	})
 }
 kyselyt();
-
+var lisatyt = "";
 function add(){
         var dataa = "http://proto353.haaga-helia.fi:8080/kysely/rest/";
         var nimi = $("#kyselyt").val();
@@ -86,7 +90,8 @@ function add(){
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
-                    $('#target').html('Kysymys "' + $('#kysymys').val() + '" lisätty kyselyyn "' + nimi + '".');
+		    lisatty += 'Kysymys "' + $('#kysymys').val() + '" lisätty kyselyyn "' + nimi + '".' + '<br>';
+                    $('#target').html(lisatty);
                 }
             });
         })
@@ -94,6 +99,22 @@ function add(){
         })	
         .complete(function() {
         })
+}
+	
+function addKysely(){
+        var uusiKysely = $("#kysely").val();
+        var jsonData = JSON.stringify({"nimi": uusiKysely});
+        $('#targetKysely').html('sending.. ' + $("#kysely").val());
+        $.ajax({
+                url: "http://proto353.haaga-helia.fi:8080/kysely/rest/",
+                type: "POST",
+                data: jsonData,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $('#targetKysely').html('Kysely"' + $('#kysely').val() + '" lisätty.');
+             	}
+        });
 }
 </script>
 </body>
