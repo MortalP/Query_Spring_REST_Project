@@ -23,6 +23,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import fi.bfk.kysely.bean.Kysely;
 import fi.bfk.kysely.bean.Kysymys;
+import fi.bfk.kysely.bean.PerusKysely;
 import fi.bfk.kysely.bean.Vastaus;
 import fi.bfk.kysely.bean.VastausKysymykseen;
 import fi.bfk.kysely.dao.KysymysDAO;
@@ -58,6 +59,14 @@ public class KysymysRestController {
 			
 		return new ResponseEntity <List<Kysely>>(kyselyt, HttpStatus.OK);	
 	}
+	
+	//
+		@RequestMapping(value="/rest/ky/", method = RequestMethod.GET)
+		public @ResponseBody ResponseEntity <List<PerusKysely>> haeKyselyJSON() {
+			List<PerusKysely> kyselyt = dao.haeKysely();
+				
+			return new ResponseEntity <List<PerusKysely>>(kyselyt, HttpStatus.OK);	
+		}
 		
 	//lisää kysymys
 	@RequestMapping(value="/rest/k/", method=RequestMethod.POST)

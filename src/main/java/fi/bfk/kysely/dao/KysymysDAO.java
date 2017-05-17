@@ -17,6 +17,8 @@ import org.springframework.stereotype.Repository;
 
 import fi.bfk.kysely.bean.Kysely;
 import fi.bfk.kysely.bean.Kysymys;
+import fi.bfk.kysely.bean.PerusKysely;
+import fi.bfk.kysely.dao.PerusKyselyRowMapper;
 import fi.bfk.kysely.dao.KysymysRowMapper;
 import fi.bfk.kysely.dao.KysymystaEiLoydyPoikkeus;
 import fi.bfk.kysely.bean.Vastaus;
@@ -214,7 +216,16 @@ public class KysymysDAO {
 
 		return kyselyt;
 	}
+	
+	public List<PerusKysely> haeKysely() {
+		String sql = "SELECT nimi, id FROM Kysely";
+		RowMapper<PerusKysely> mapper = new PerusKyselyRowMapper();
+		List<PerusKysely> kyselyt = jdbcTemplate.query(sql, mapper);
+
+		return kyselyt;
+	}
 }
+	
 
 
 
