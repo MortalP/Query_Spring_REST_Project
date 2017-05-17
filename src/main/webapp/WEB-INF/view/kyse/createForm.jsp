@@ -13,13 +13,25 @@
 	src="https://code.jquery.com/jquery-2.1.4.js"
 	integrity="sha256-siFczlgw4jULnUICcdm9gjQPZkw/YPDqhQ9+nAOScE4="
 	crossorigin="anonymous"></script>
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js" type="text/javascript" ></script>
+	<style type="text/css">
+        .virhe{
+            color: red;
+            font-size: 130%;
+        }
+        input.kenttaVirhe, textarea.kenttaVirhe {
+            border: 1px solid red !important;
+        }
+    </style>
     
 <title>Kysymyksen lisääminen</title>
 </head>
 <body>
 <h1>Kysely lisäys</h1>
-Anna kyselyn nimi<input type="text" name="kysely" id="kysely"><br>
-Anna ensimmäinen kysymys<input type="text" name="ekaKysymys" id="ekaKysymys"><br>
+<form id="validointi">
+<label for="kysely">Anna kyselyn nimi</label><input type="text" name="kysely" id="kysely"><br>
+<label for="ekaKysymys">Anna ensimmäinen kysymys</label><input type="text" name="ekaKysymys" id="ekaKysymys"><br>
+</form>
 <button onclick="addKysely()">Lisää kysely</button>
 <div id="targetKysely"></div>
 <div id="targetKysymys"></div>
@@ -101,6 +113,7 @@ function add(){
 }
 	
 function addKysely(){
+	if ($("#validointi").valid()) {
         var uusiKysely = $("#kysely").val();
         var jsonData = JSON.stringify({"nimi": uusiKysely});
         $('#targetKysely').html('sending.. ' + $("#kysely").val());
@@ -115,6 +128,7 @@ function addKysely(){
                     addEkaKysymys();
              	}
         });
+	}
       
 }
 function addEkaKysymys(){
@@ -153,6 +167,38 @@ function addEkaKysymys(){
      })
     
 }
+var validator = $("#validointi").validate({
+	errorClass: "virhe",
+	errorElement: "div",				
+	rules: {
+		kysely:  {
+			required: true,
+		},	
+		ekaKysymys:  {
+			required: true,
+
+		},	
+	},
+	messages: {
+		kysely: {
+			required: "Anna kyselyn nimi",
+            
+		},
+		ekaKysymys: {
+		   required: "Anna ensimmäinen kysymys"
+		},
+		
+	},
+	highlight: function(element) {
+		$(element).addClass("kenttaVirhe");
+	}, 
+	unhighlight: function(element) {
+		$(element).removeClass("kenttaVirhe");
+	},
+	errorPlacement: function(error, element) {
+		error.insertAfter(element.parent());
+	},
+}) // validator
 </script>
 </body>
 </html>
